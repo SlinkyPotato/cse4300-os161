@@ -48,26 +48,22 @@ int main(int argc, char const *argv[]) {
   pthread_exit(NULL);
 }
 
-void * printThread(void * pThreadArgs) {
+void * printThread(void *pThreadArgs) {
   struct threadArgs *pthreadArgs = (struct threadArgs *) pThreadArgs;
   int threadId = pthreadArgs->threadId;
   int numOfCalls = threadArgsArray[threadId].numOfCalls;
   // printf("Outside numOfCalls: %d\n", threadId);
   // while (numOfCalls < 10) {
-    // printf("Inside numofCalls: %d\n", threadId);
-    pthread_mutex_lock (&mutex);
-    printf("Is %d locked?", threadId);
-    // if (didLock) {
-    //   int differenceThread = threadId - last_threadID;
-    //   if (differenceThread == 0) {
-    //     printf("My Turn: %d\n", threadId);
-    //     threadArgsArray[threadId].numOfCalls = numOfCalls + 1;
-    //   } else {
-    //     printf("Not My Turn: %d\n", threadId);
-    //   }
-    //   last_threadID = (threadId == 5) ? 1 : threadId + 1;
-      pthread_mutex_unlock (&mutex);
-    // }
+    pthread_mutex_lock(&mutex);
+    int differenceThread = threadId - last_threadID;
+    if (differenceThread == 0) {
+      printf("My Turn: %d\n", threadId);
+      threadArgsArray[threadId].numOfCalls = numOfCalls + 1;
+    } else {
+      printf("Not My Turn: %d\n", threadId);
+    }
+    last_threadID = (threadId == 5) ? 1 : threadId + 1;
+    pthread_mutex_unlock (&mutex);
     pthread_exit((void*) 0);
   // }
 }
