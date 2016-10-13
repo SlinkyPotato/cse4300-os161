@@ -11,21 +11,21 @@ int last_threadID = 1;
 pthread_t threads[NUM_THREADS];
 pthread_mutex_t mutex;
 
-struct threadArgs {
+typedef struct threadArgs {
   int threadId;
   int numOfCalls;
-};
+} ThreadArgs;
 
-struct threadArgs threadArgsArray[NUM_THREADS];
+ThreadArgs threadArgsArray[NUM_THREADS];
 
 int main(int argc, char const *argv[]) {
   int taskIds[NUM_THREADS];
   // struct threadArgs *threadData;
   void *status;
   pthread_attr_t attr;
-
+  
   pthread_mutex_init(&mutex, NULL);
-
+  
   // Create theads to perform calculation
   pthread_attr_init(&attr);
   pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
