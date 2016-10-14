@@ -19,51 +19,54 @@ typedef struct threadArgs {
 ThreadArgs threadArgsArray[NUM_THREADS];
 
 int main(int argc, char const *argv[]) {
-  int taskIds[NUM_THREADS];
-  // struct threadArgs *threadData;
-  void *status;
   pthread_attr_t attr;
+  void *status;
   
-  pthread_mutex_init(&mutex, NULL);
+  // Initialize thread variables
+  pthread_mutex_init(&mutex, NULL); // initialize mutex
+  pthread_attr_init(&attr); // create threads to perform calculation
   
-  // Create theads to perform calculation
-  pthread_attr_init(&attr);
+  // Create joinable threads
   pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-
   for (int i = 0; i < NUM_THREADS; i++) {
-    taskIds[i] = i + 1;
-    threadArgsArray[i].threadId = taskIds[i];
-    int rc = pthread_create(&threads[i], NULL, printThread, &threadArgsArray[i]);
+    threadArgsArray[i].threadId = i + 1;
+    int rc = pthread_create(&threads[i], &attr, printThread, &threadArgsArray[i]);
     if (rc) {
       printf("An error has occured while trying to create a pthread.");
       exit(-1);
     }
   }
   pthread_attr_destroy(&attr);
-
-  for(int i=0; i < NUM_THREADS; i++) {
-    pthread_join(threads[i], &status);
+  // Wait for threads to finish
+  for(int i = 0; i < NUM_THREADS; i++) {
+    int rc = pthread_join(threads[i], &status);
+    if (rc) {
+      printf("An error occured while trying to create a pthread");
+      exit(-1);
+    }
   }
+  // Clean up
   pthread_mutex_destroy(&mutex);
+  printf("All threads finished their jobs\n");
   pthread_exit(NULL);
 }
 
 void * printThread(void *pThreadArgs) {
-  struct threadArgs *pthreadArgs = (struct threadArgs *) pThreadArgs;
-  int threadId = pthreadArgs->threadId;
-  int numOfCalls = threadArgsArray[threadId].numOfCalls;
-  // printf("Outside numOfCalls: %d\n", threadId);
-  // while (numOfCalls < 10) {
+  struct threadArgs *threadArgs = (struct threadArgs *) pThreadArgs;
+  int *threadId = &threadArgs->threadId;
+  int *numOfCalls = &threadArgs->numOfCalls;
+  while (*numOfCalls < 10) {
     pthread_mutex_lock(&mutex);
-    int differenceThread = threadId - last_threadID;
+    int differenceThread = *threadId - last_threadID;
     if (differenceThread == 0) {
-      printf("My Turn: %d\n", threadId);
-      threadArgsArray[threadId].numOfCalls = numOfCalls + 1;
+      printf("My Turn: %d\n", *threadId);
+      last_threadID = (*threadId == 5) ? 1 : *threadId + 1;
+      *numOfCalls = *numOfCalls + 1;
     } else {
-      printf("Not My Turn: %d\n", threadId);
+      printf("Not My Turn: %d\n", *threadId);
     }
-    last_threadID = (threadId == 5) ? 1 : threadId + 1;
     pthread_mutex_unlock (&mutex);
-    pthread_exit((void*) 0);
-  // }
+    sleep(1);
+  }
+  pthread_exit(NULL);
 }
