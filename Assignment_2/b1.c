@@ -5,6 +5,8 @@
 
 #define NUM_THREADS 5 // number of threads
 
+int last_threadID = 1; // global thread tracker
+
 pthread_t threads[NUM_THREADS];
 pthread_mutex_t mutex;
 
@@ -17,8 +19,6 @@ ThreadArgs threadArgsArray[NUM_THREADS];
 
 // Defined Functions
 void * printThread(void *);
-
-int last_threadID = 1; // global thread tracker
 
 int main(int argc, char const *argv[]) {
   pthread_attr_t attr;
@@ -56,7 +56,7 @@ int main(int argc, char const *argv[]) {
 }
 
 void * printThread(void *pThreadArgs) {
-  ThreadArgs *threadArgs = (struct threadArgs *) pThreadArgs;
+  ThreadArgs *threadArgs = (ThreadArgs *) pThreadArgs;
   int *threadId = &threadArgs->threadId;
   int *numOfCalls = &threadArgs->numOfCalls;
   while (*numOfCalls < 10) {
