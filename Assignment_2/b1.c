@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-// Defined Functions
-void * printThread(void *);
+#define NUM_THREADS 5 // number of threads
 
-// Global Variables
-#define NUM_THREADS 5
-int last_threadID = 1;
 pthread_t threads[NUM_THREADS];
 pthread_mutex_t mutex;
 
@@ -17,6 +14,11 @@ typedef struct threadArgs {
 } ThreadArgs;
 
 ThreadArgs threadArgsArray[NUM_THREADS];
+
+// Defined Functions
+void * printThread(void *);
+
+int last_threadID = 1; // global thread tracker
 
 int main(int argc, char const *argv[]) {
   pthread_attr_t attr;
@@ -36,23 +38,25 @@ int main(int argc, char const *argv[]) {
       exit(-1);
     }
   }
-  pthread_attr_destroy(&attr);
+  
   // Wait for threads to finish
-  for(int i = 0; i < NUM_THREADS; i++) {
+  for (int i = 0; i < NUM_THREADS; i++) {
     int rc = pthread_join(threads[i], &status);
     if (rc) {
-      printf("An error occured while trying to create a pthread");
+      printf("An error occured while trying to synchronize threads.");
       exit(-1);
     }
   }
+  
   // Clean up
+  pthread_attr_destroy(&attr);
   pthread_mutex_destroy(&mutex);
   printf("All threads finished their jobs\n");
   pthread_exit(NULL);
 }
 
 void * printThread(void *pThreadArgs) {
-  struct threadArgs *threadArgs = (struct threadArgs *) pThreadArgs;
+  ThreadArgs *threadArgs = (struct threadArgs *) pThreadArgs;
   int *threadId = &threadArgs->threadId;
   int *numOfCalls = &threadArgs->numOfCalls;
   while (*numOfCalls < 10) {
