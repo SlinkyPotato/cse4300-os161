@@ -10,15 +10,15 @@ int last_threadID = 1; // global thread tracker
 pthread_t threads[NUM_THREADS];
 pthread_mutex_t mutex;
 
-typedef struct threadArgs {
+typedef struct threadArgs { // arguments of threads
   int threadId;
   int numOfCalls;
 } ThreadArgs;
 
-ThreadArgs threadArgsArray[NUM_THREADS];
+ThreadArgs threadArgsArray[NUM_THREADS]; // arguments stored in array
 
 // Defined Functions
-void * printThread(void *);
+void * printThread(void *); 
 
 int main(int argc, char const *argv[]) {
   pthread_attr_t attr;
@@ -56,11 +56,11 @@ int main(int argc, char const *argv[]) {
 }
 
 void * printThread(void *pThreadArgs) {
-  ThreadArgs *threadArgs = (ThreadArgs *) pThreadArgs;
-  int *threadId = &threadArgs->threadId;
-  int *numOfCalls = &threadArgs->numOfCalls;
-  while (*numOfCalls < 10) {
-    pthread_mutex_lock(&mutex);
+  ThreadArgs *threadArgs = (ThreadArgs *) pThreadArgs; // cast object to Thread Args
+  int *threadId = &threadArgs->threadId; // assigne ID to object that is pointed
+  int *numOfCalls = &threadArgs->numOfCalls; // assign number of calls to object that is pointed at
+  while (*numOfCalls < 10) { // while number of calls is less than 10
+    pthread_mutex_lock(&mutex); // lock thread access using mutex
     int differenceThread = *threadId - last_threadID;
     if (differenceThread == 0) {
       printf("My Turn: %d\n", *threadId);

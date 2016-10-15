@@ -84,14 +84,14 @@ int main(int argc, char const *argv[]) { // main thread
 	pthread_mutex_destroy(&mutex);
 	pthread_cond_destroy(&producerCond);
 	pthread_cond_destroy(&consumerCond);
-	printf("Number of producers: %d\n Number of times producer went to sleep: %d", NUM_PRODUCERS, numProducerSleeps);
-	printf("Number of consumers %d\n Number of times consumer went to sleep:  %d times.", NUM_CONSUMERS, numConsumerSleeps); 
+	printf("Number of producers: %d\n Number of times producer went to sleep: %d\n", NUM_PRODUCERS, numProducerSleeps);
+	printf("Number of consumers %d\n Number of times consumer went to sleep:  %d times.\n", NUM_CONSUMERS, numConsumerSleeps); 
 	pthread_exit(NULL);
 }
 
+// Producer thread
 void * produceItem(void * pThreadArgs) {
-	// ThreadArgs *threadArgs = (ThreadArgs *) pThreadArgs;
-	int item;
+	int item; // initialize item
 	while (TRUE) {
 		pthread_mutex_lock(&mutex); 
 		if (buffer >= QUEUE_LIMIT) {
