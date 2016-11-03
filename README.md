@@ -6,7 +6,7 @@ This is the main OS for UConn's CSE 4300 Operating Systems Class.
 
 **Before delving into this pre-install process, please note that this repository includes all the necessary download files under `docs/downloads`. As such, it is safe to ignore specific instructions on downloading external files (install of files is still required).**
 
-**Note: These instruction files are also located under `docs/`.**
+**Note**: These instruction files are also located under `docs/`.
 
 **Step 1:** Assuming you are using Windows operating system, download [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (or any virtual machine software) for Windows hosts x86/amd64. Install the virtual machine software. Instructions for installing Virtual box are provided under `docs/`.
 
@@ -228,7 +228,22 @@ make
 ```
 
 **Step 2:** Try Running OS/161
-You should now be able to use the SYS/161 simulator to run the OS/161 kernel that you built and installed. The SYS/161 simulator requires a configuration file in order to run. To obtain one, do this: cd $HOME/cs4300-os161/root cp $HOME/sys161/sys161.conf . (Please note the “.” at the end of the command which is required) Now run your compiled kernel on the simulator. Assuming that you're still in the $HOME/cs4300-os161/root directory, do this: sys161 kernel-ASST0 You should see some output that looks something like this:
+You should now be able to use the SYS/161 simulator to run the OS/161 kernel that you built and installed. The SYS/161 simulator requires a configuration file in order to run. To obtain one, do this: 
+
+```bash
+cd $HOME/cs4300-os161/root 
+cp $HOME/sys161/sys161.conf .  
+```
+
+Now run your compiled kernel on the simulator. Assuming that you're still in the `$HOME/cs4300-os161/root` directory, do this: 
+
+```bash
+sys161 kernel-ASST0 
+```
+
+You should see some output that looks something like this:
+
+```
 sys161: System/161 release 1.99.05, compiled Apr 28 2011 21:49:59
 OS/161 base system version 1.11
 Copyright (c) 2000, 2001, 2002, 2003
@@ -252,6 +267,8 @@ lser0 at lamebus0
 con0 at lser0
 pseudorand0 (virtual)
 OS/161 kernel [? for menu]:
+```
+
 The last line is a command prompt from the OS/161 kernel. For now, just enter the command q to shut down the simulation and return to your shell.
 
 [//]: # (The following are link variables)
