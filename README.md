@@ -4,18 +4,18 @@ This is the main OS for UConn's CSE 4300 Operating Systems Class.
 
 ## Pre-Install
 
-**Before delving into this pre-install process, please note that this repository includes all the necessary download files under `docs/downloads`. As such, it is safe to ignore specific instructions on downloading external files (install of files is still required).**
+**Before delving into this pre-install process, please note that this repository includes all the necessary Downloads files under `docs/Downloads`. As such, it is safe to ignore specific instructions on Downloading external files (install of files is still required).**
 
 **Note**: These instruction files are also located under `docs/`.
 
-**Step 1:** Assuming you are using Windows operating system, download [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (or any virtual machine software) for Windows hosts x86/amd64. Install the virtual machine software. Instructions for installing Virtual box are provided under `docs/`.
+**Step 1:** Assuming you are using Windows operating system, Downloads [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (or any virtual machine software) for Windows hosts x86/amd64. Install the virtual machine software. Instructions for installing Virtual box are provided under `docs/`.
 
-**Step 2:** Once you finish installing virtual box, download Ubuntu v11.10 from the following link (Please install this specific version to avoid incompatibility issues with OS161 v1.11. Choose not to update Linux while installing. Please note that this specific version is not supported anymore, which is fine.)
+**Step 2:** Once you finish installing virtual box, Downloads Ubuntu v11.10 from the following link (Please install this specific version to avoid incompatibility issues with OS161 v1.11. Choose not to update Linux while installing. Please note that this specific version is not supported anymore, which is fine.)
 	[ubuntu-11.10-desktop-i386.iso](http://www.engr.uconn.edu/~mok11002/public_html/ubuntu-11.10-desktop-i386.iso)
 
 **Step 3:** Install Ubuntu on the virtual machine.
 
-**Step 4:** Once Ubuntu is installed on the virtual machine, turn on Ubuntu and set up your own user profile. Download the following files within the Ubuntu OS inside your `Download` folder
+**Step 4:** Once Ubuntu is installed on the virtual machine, turn on Ubuntu and set up your own user profile. Downloads the following files within the Ubuntu OS inside your `Downloads` folder
 
 * [gettext_0.18.1.1-3ubuntu1_i386.deb](http://www.engr.uconn.edu/~mok11002/public_html/gettext_0.18.1.1-3ubuntu1_i386.deb)
 * [libncurses5-dev_5.9-1ubuntu5_i386.deb](http://www.engr.uconn.edu/~mok11002/public_html/libncurses5-dev_5.9-1ubuntu5_i386.deb)
@@ -23,10 +23,10 @@ This is the main OS for UConn's CSE 4300 Operating Systems Class.
 * [libunistring0_0.9.3-4_i386.deb](http://www.engr.uconn.edu/~mok11002/public_html/libunistring0_0.9.3-4_i386.deb)
 * [texinfo_4.13a.dfsg.1-8ubuntu1_i386.deb](http://www.engr.uconn.edu/~mok11002/public_html/texinfo_4.13a.dfsg.1-8ubuntu1_i386.deb)
 
-Assuming that these are downloaded into your `~/Download` folder, you can install them by executing the following commands
+Assuming that these are Downloaded into your `~/Downloads` folder, you can install them by executing the following commands
 
 ```bash
-cd ~/Download
+cd ~/Downloads
 sudo dpkg -i ./libtinfo-dev*.deb 
 sudo dpkg -i ./libncurses5-dev*.deb 
 sudo dpkg -i ./libunistring0*.deb 
@@ -34,7 +34,7 @@ sudo dpkg -i ./gettext*.deb
 sudo dpkg -i ./texinfo*.deb
 ```
 
-**Step 5:** Download the following files into your `~/Download` folder.
+**Step 5:** Downloads the following files into your `~/Downloads` folder.
 * [os161.tar.gz]
 * [os161-binutils.tar.gz]
 * [os161-gcc.tar.gz]
@@ -43,7 +43,7 @@ sudo dpkg -i ./texinfo*.deb
 
 ## Install Dependencies
 
-**Step 1:** You will need the following source files. Please make sure that you already downloaded them.
+**Step 1:** You will need the following source files. Please make sure that you already Downloaded them.
 * [os161.tar.gz]
 * [os161-binutils.tar.gz]
 * [os161-gcc.tar.gz]
@@ -52,7 +52,7 @@ sudo dpkg -i ./texinfo*.deb
 
 **Step 2:** Build and Install the Binary Utilities (Binutils)
 
-Unpack the binutils archive by executing the following command inside your `~/Download` folder: 
+Unpack the binutils archive by executing the following command inside your `~/Downloads` folder: 
 
 ```bash
 tar -xzf os161-binutils.tar.gz
@@ -103,7 +103,7 @@ printenv PATH
 
 **Step 4:** Install the GCC MIPS Cross-Compiler
 
-Unpack the gcc archive by executing the following command inside your `~/Download` folder:
+Unpack the gcc archive by executing the following command inside your `~/Downloads` folder:
 
 ```bash
 tar -xzf os161-gcc.tar.gz
@@ -128,10 +128,10 @@ make install
 
 **Step 5:** Install GDB
 
-Unpack the gdb archive by executing the following command inside your `~/Download` folder: 
+Unpack the gdb archive by executing the following command inside your `~/Downloads` folder: 
 
 ```bash
-cd ~/Download
+cd ~/Downloads
 tar -xzf os161-gdb.tar.gz
 ```
 
@@ -154,10 +154,10 @@ make install
 
 ## Build and Install sys161 Simulator
 
-Unpack the sys161 archive by executing the following command inside your Download folder: 
+Unpack the sys161 archive by executing the following command inside your Downloads folder: 
 
 ```bash
-cd ~/Download
+cd ~/Downloads
 tar -xzf sys161.tar.gz  
 cd sys161-1.99.05 
 ./configure --prefix=$HOME/sys161 mipseb 
