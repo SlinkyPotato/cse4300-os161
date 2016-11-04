@@ -1,2 +1,6 @@
 *.exe
 *.zip
+/temp/*
+/root
+*.sublime-project
+*.sublime-workspace
