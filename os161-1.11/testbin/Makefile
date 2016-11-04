@@ -39,6 +39,7 @@ all depend tags clean install:
 	(cd sort && $(MAKE) $@)
 	(cd sty && $(MAKE) $@)
 	(cd tail && $(MAKE) $@)
+	(cd testA && $(MAKE) $@)
 	(cd tictac && $(MAKE) $@)
 	(cd triplehuge && $(MAKE) $@)
 	(cd triplemat && $(MAKE) $@)
