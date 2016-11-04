@@ -6,7 +6,42 @@
 * System Call used to exit out of infinite loop
 */
 void sys_exit(int exitCode) {
+	if (curthread->t_stack != NULL) {
+			/*
+			 * Check the magic number we put on the bottom end of
+			 * the stack in thread_fork. If these assertions go
+			 * off, it most likely means you overflowed your stack
+			 * at some point, which can cause all kinds of
+			 * mysterious other things to happen.
+			 */
+			assert(curthread->t_stack[0] == (char)0xae);
+			assert(curthread->t_stack[1] == (char)0x11);
+			assert(curthread->t_stack[2] == (char)0xda);
+			assert(curthread->t_stack[3] == (char)0x33);
+		}
 
+	splhigh();
+
+	if (curthread->t_vmspace) {
+		/*
+		 * Do this carefully to avoid race condition with
+		 * context switch code.
+		 */
+		struct addrspace *as = curthread->t_vmspace;
+		curthread->t_vmspace = NULL;
+		as_destroy(as);
+	}
+
+	if (curthread->t_cwd) {
+		VOP_DECREF(curthread->t_cwd);
+		curthread->t_cwd = NULL;
+	}
+
+	assert(numthreads>0);
+	numthreads--;
+	mi_switch(S_ZOMB);
+
+	panic("Thread came back from the dead!\n");
 }
 
 /*

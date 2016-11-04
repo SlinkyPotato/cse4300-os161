@@ -73,11 +73,13 @@ mips_syscall(struct trapframe *tf)
 			break;
 	    /* Add stuff here */
 		case SYS_exit:
-			err = sys_exit();
+			err = sys_exit(tf->tf_a0);
 			break;
 		case SYS_printint:
+			err = sys_printint(tf->tf_a0);
 			break;
 		case SYS_reversestring:
+			err = sys_reversestring(tf->tf_a0, tf->tf_a1);
 			break;
 	    default:
 		kprintf("Unknown syscall %d\n", callno);
