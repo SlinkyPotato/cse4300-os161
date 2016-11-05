@@ -6,6 +6,9 @@ export PATH=$HOME/sys161/bin:$HOME/sys161/tools/bin:$PATH
 
 echo "os161 is being rebuilt."
 
+cd $HOME/cs4300-os161/os161-1.11
+./configure --ostree=$HOME/cs4300-os161/root --toolprefix=cs4300-
+
 cd kern/conf
 ./config ASST0
 
