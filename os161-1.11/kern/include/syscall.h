@@ -7,5 +7,10 @@
 
 int sys_reboot(int code);
 
+void sys_exit(int exitCode); // assn3
+
+int sys_printint(int c); // assn3
+
+int sys_reversestring(const char *str, int len); // assn3
 
 #endif /* _SYSCALL_H_ */

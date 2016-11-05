@@ -1,12 +1,27 @@
 #OS 161 v1.11
 
-This is the main OS for UConn's CSE 4300 Operating Systems Class.
+This is the main OS for UConn's CSE 4300 Operating System Class. Instructions are provided below and within `docs`.
 
-## Pre-Install
+## Simple Installation
 
-**Before delving into this pre-install process, please note that this repository includes all the necessary Downloads files under `docs/downloads`. Links to download files is also provided. This repo should be pulled into your `$HOME` directory. Additionally, these instructions are also located under `docs/`**
+Installation has been greatly simplified and should take several minutes. Simply pull the repo to your `$HOME` directory and enable execution for the following three scripts: `install.sh`, `rebuild.sh`, `run.sh`, followed by running the install script.
 
-**Step 1:** Assuming you are using Windows operating system, Download [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (or any virtual machine software) for Windows hosts x86/amd64. Install the virtual machine software. Instructions for installing Virtual box are provided under `docs/`.
+```bash
+cd $HOME/cs4300-os161
+chmod u+x install.sh | chmod u+x rebuild.sh | chmod u+x run.sh
+./install.sh
+```
+
+On success you should be brought to the OS161 kernel command prompt.
+
+![OS 161 Kernel](http://i.imgur.com/qMi874C.png)
+
+## Manual Installation 
+
+### Pre-Install
+All the necessary download dependencies are located under `docs/downloads`. Download links to the dependenices are also provided below.
+
+**Step 1:** Assuming you are using Windows, download [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (or any virtual machine software) for Windows hosts x86/amd64. Instructions for installing Virtual box are provided under `docs/`.
 
 **Step 2:** Once you finish installing virtual box, Download Ubuntu v11.10 from the following link (Please install this specific version to avoid incompatibility issues with OS161 v1.11. Choose not to update Linux while installing. Please note that this specific version is not supported anymore, which is fine.)
 	[ubuntu-11.10-desktop-i386.iso](http://www.engr.uconn.edu/$HOMEmok11002/public_html/ubuntu-11.10-desktop-i386.iso)
@@ -32,7 +47,7 @@ sudo dpkg -i ./gettext*.deb
 sudo dpkg -i ./texinfo*.deb
 ```
 
-## Install Dependencies
+### Install Dependencies
 
 **Step 1:** Make sure the following files are located under `docs/downloads`, if not please download:
 
@@ -88,9 +103,9 @@ open a new shell:
 export PATH=$HOME/sys161/bin:$HOME/sys161/tools/bin:$PATH
 ```
 
-**Note: Setting these variables only work in the shell or window where you execute the above commands.** 
+**Setting these variables only work in the shell or window where you execute the above commands.** 
 
-Note that you may need to log out and log back in again so that this PATH change will take effect. You can check the current setting of the PATH environment variable using the command 
+You may need to log out and log back in again so that this PATH change will take effect. You can check the current settings of the PATH environment variable using the command
 
 ```bash
 printenv PATH
@@ -148,7 +163,7 @@ make
 make install
 ```
 
-## Build and Install sys161 Simulator
+### Build and Install sys161 Simulator
 
 Unpack the sys161 archive by executing the following command inside `docs/downloads`: 
 
@@ -193,20 +208,20 @@ cs4300-gcc@ cs4300-ld@ cs4300-run@ stat161@
 
 These are all of the tools you will need to work with sys161.
 
-**Step 2:** Install OS/161
+**Step 2:** Install OS161
 
-Now go into `docs/downloads` extract the `os161.tar.gz` file into the root of the project. This will contain the compiled OS/161 kernels, and related test programs: 
+Now go into `docs/downloads` extract the `os161.tar.gz` file into the root of the project. This will contain the compiled OS161 kernels, and related test programs: 
 
 ```bash
 cd $HOME/cs4300-os161/docs/downloads
 tar -xzf os161.tar.gz -C $HOME/cs4300-os161/		# contains the source code
 ```
 
-## Configure and Build OS/161 Kernel
+### Configure and Build OS161 Kernel
 
 **Step 1:** Configure and Build
 
-The next step is to configure OS/161 and compile the kernel. From the `$HOME/cs4300-os161` directory, do the following: 
+The next step is to configure OS161 and compile the kernel. From the `$HOME/cs4300-os161` directory, do the following: 
 
 ```bash
 cd $HOME/cs4300-os161/os161-1.11
@@ -225,15 +240,15 @@ The string `ASST0` in the commands above indicates that you are working on assig
 The make install command will create a directory called `$HOME/cs4300-os161/root`, into which it will place the compiled kernel in a file called `kernel-ASST0`. 
 It will also create a symbolic link call kernel referring to `kernel-ASST0`. Check the `$HOME/cs4300-os161/root` directory to make sure that your kernel is in place.
 
-Next, build the OS/161 user level utilities and test programs:
+Next, build the OS161 user level utilities and test programs:
 
 ```bash
 cd $HOME/cs4300-os161/os161-1.11
 make
 ```
 
-**Step 2:** Try Running OS/161
-You should now be able to use the SYS/161 simulator to run the OS/161 kernel that you built and installed. The SYS/161 simulator requires a configuration file in order to run. 
+**Step 2:** Try Running OS161
+You should now be able to use the SYS/161 simulator to run the OS161 kernel that you built and installed. The SYS/161 simulator requires a configuration file in order to run. 
 To obtain one, do this: 
 
 ```bash
@@ -275,7 +290,7 @@ pseudorand0 (virtual)
 OS/161 kernel [? for menu]:
 ```
 
-The last line is a command prompt from the OS/161 kernel. For now, just enter the command q to shut down the simulation and return to your shell.
+The last line is a command prompt from the OS161 kernel. For now, just enter the command q to shut down the simulation and return to your shell.
 
 [//]: # (The following are link variables)
 
